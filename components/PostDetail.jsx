@@ -142,8 +142,6 @@ const PostDetail = ({ post }) => {
                             />
                         ),
                         code_block: ({ children }) => {
-                            console.log(children);
-
                             const text = children.props.content.map(
                                 item => item.text
                             );

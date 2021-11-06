@@ -116,6 +116,8 @@ export const getPostDetails = async (slug) => {
                     bio
                     photo {
                         url
+                        height
+                        width
                     }
                 }
                 categories {
