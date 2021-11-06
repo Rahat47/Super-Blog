@@ -35,3 +35,49 @@ export const getPosts = async () => {
     const result = await request(graphqlEndpoint, query);
     return result.postsConnection.edges;
 };
+
+export const getRecentPosts = async () => {
+    const query = gql`
+            query getPostDetails() {
+                posts(
+                    orderBy: createdAt_ASC
+                    last: 3
+                    ) {
+                        title
+                        featuredImage {
+                            url
+                        }
+                        createdAt
+                        slug
+                    }
+            }
+        `;
+
+    const result = await request(graphqlEndpoint, query);
+    return result.posts;
+};
+
+export const getSimilliarPosts = async (slug, category) => {
+    const query = gql`
+        query getSimilliarPosts($slug: String!, $categories: [String!]) {
+            posts(
+                where: {
+                    slug_not: $slug
+                    AND: { categories_some: { slug_in: $categories } }
+                }
+                orderBy: createdAt_DESC
+                last: 3
+            ) {
+                title
+                featuredImage {
+                    url
+                }
+                createdAt
+                slug
+            }
+        }
+    `;
+
+    const result = await request(graphqlEndpoint, query);
+    return result.posts;
+};
