@@ -1,38 +1,16 @@
-import { useContext } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-
-const categories = [
-    {
-        name: 'All',
-        slug: 'all',
-    },
-    {
-        name: 'Web Development',
-        slug: 'webdev',
-    },
-    {
-        name: 'React',
-        slug: 'react',
-    },
-    {
-        name: 'Node',
-        slug: 'node',
-    },
-    {
-        name: 'Vue',
-        slug: 'vue',
-    },
-    {
-        name: 'Angular',
-        slug: 'angular',
-    },
-    {
-        name: 'JavaScript',
-        slug: 'javascript',
-    },
-];
+import { getCategories } from '../services';
 
 const Header = () => {
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        getCategories().then(categories => {
+            setCategories(categories);
+        });
+    }, []);
+
     return (
         <div className='container mx-auto px-10 mb-8'>
             <div className='border-b w-full inline-block border-blue-400 py-8'>
@@ -50,7 +28,7 @@ const Header = () => {
                             href={`category/${catgory.slug}`}
                             key={catgory.slug}
                         >
-                            <span className='md:float-right mt-2 align-middle text-white ml-4 font-semibold cursor-pointer'>
+                            <span className='md:float-right p-3 mt-2 align-middle text-white ml-4 font-semibold cursor-pointer transition-all duration-300 hover:bg-gray-700 '>
                                 {catgory.name}
                             </span>
                         </Link>
