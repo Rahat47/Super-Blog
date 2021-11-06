@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@graphcms/rich-text-react-renderer": "^0.3.2",
     "@heroicons/react": "^1.0.5",
     "graphql": "^15.7.2",
     "graphql-request": "^3.6.1",
