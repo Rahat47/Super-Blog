@@ -3,6 +3,7 @@ import moment from 'moment';
 import Image from 'next/image';
 import React from 'react';
 import { RichText } from '@graphcms/rich-text-react-renderer';
+import { CodeBlock, dracula } from 'react-code-blocks';
 
 const PostDetail = ({ post }) => {
     console.log(post);
@@ -140,6 +141,22 @@ const PostDetail = ({ post }) => {
                                 title={title}
                             />
                         ),
+                        code_block: ({ children }) => {
+                            console.log(children);
+
+                            const text = children.props.content.map(
+                                item => item.text
+                            );
+
+                            return (
+                                <CodeBlock
+                                    text={text.join(' ')}
+                                    language='javascript'
+                                    theme={dracula}
+                                    showLineNumbers={false}
+                                />
+                            );
+                        },
                     }}
                 />
             </div>
